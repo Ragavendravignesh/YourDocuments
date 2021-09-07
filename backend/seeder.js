@@ -2,8 +2,13 @@ import dotenv from 'dotenv';
 import connectDB from './config/db.js'
 
 import User from './models/userSchema.js';
+import Indent from './models/indentSchema.js';
+import Order from './models/orderSchema.js';
 
 import userData from './data/users.js';
+import indentData from './data/indent.js';
+import orderData from './data/order.js';
+
 
 dotenv.config();
 connectDB();
@@ -11,8 +16,16 @@ connectDB();
 const importData = async () => {
     try{
         await User.deleteMany();
-        await User.insertMany(userData);
+        await Indent.deleteMany();
+        await Order.deleteMany();
 
+        const createdUsers = await User.insertMany(userData);
+        const customer = createdUsers[1]._id;
+        
+        await Indent.insertMany(indentData);
+        const ordersWithUser = orderData.map(data => { return {...data, user: customer } });
+
+        await Order.insertMany(ordersWithUser);
         console.log("Data Imported");
 
         process.exit();
@@ -25,6 +38,7 @@ const importData = async () => {
 const deleteData = async() => {
     try {
         await User.deleteMany();
+        await Indent.deleteMany();
 
         console.log("Data deleted successfully!");
 
