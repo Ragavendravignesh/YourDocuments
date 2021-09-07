@@ -1,5 +1,4 @@
 import asyncHandler from 'express-async-handler'
-import user from '../models/userSchema.js'
 import User from '../models/userSchema.js'
 
 import generateToken from '../utils/generateToken.js'
