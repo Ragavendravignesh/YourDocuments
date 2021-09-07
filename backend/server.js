@@ -2,16 +2,22 @@ import express from 'express'
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 
-dotenv.config();
+import { notFound, errorHandler } from './middleware/errorMiddleware.js';
+import userRoutes from './routes/userRoutes.js';
 
+dotenv.config();
 connectDB();
 
 const app = express();
 
-app.get("/", (req, res) => {
-    res.send("Hey, you have made a get request!");
-});
+app.use(express.json());
 
-app.listen(5000, () => {
+app.use('/api/users', userRoutes);
+
+app.use(notFound);
+app.use(errorHandler);
+
+
+app.listen(process.env.PORT, () => {
     console.log("Server is running at port 5000")
 });
