@@ -1,0 +1,38 @@
+.top-banner {
+  position: relative;
+  background: url('../../images/background.jpg') no-repeat center/cover;
+  border-radius: 1rem;
+  height: 70vh;
+  color: #fff;
+}
+
+.top-banner::before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.content h1 {
+    font-size: 5rem;
+}
+
+.content p {
+    font-size: 2rem;
+}
+
+.top-banner * {
+    z-index: 10;
+}
