@@ -1,8 +1,6 @@
 import React from 'react'
 import { Spinner } from 'react-bootstrap';
 
-import React from 'react'
-
 const Loader = () => {
     return (
         <Spinner
@@ -11,7 +9,7 @@ const Loader = () => {
          style={{
              height: '100px',
              width: '100px',
-             margin: auto,
+             margin: 'auto',
              display: 'block'
          }}
         >
