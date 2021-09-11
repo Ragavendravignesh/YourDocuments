@@ -1,0 +1,17 @@
+.form-btn {
+    background:#800080;
+    color: #fff;
+    border: none;
+}
+
+.form-btn:hover {
+    background: #400040;
+}
+
+.form-link {
+    color: #800080;
+}
+
+.form-link:hover {
+    color: #400040;
+}
