@@ -5,45 +5,54 @@ import { Form, Button, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import Loader from '../../components/Loader'
 import Message from '../../components/Message'
+import { register } from '../../actions/userActions'
 
 const RegisterScreen = ({ history }) => {
+  const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [message, setMessage] = useState('')
 
-  //   const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
-  //   const userRegister = useSelector((state) => state.userRegister)
-  //   const { loading, error, userInfo } = userRegister
+  const userRegister = useSelector((state) => state.userRegister)
+  const { loading, error, userInfo } = userRegister
 
-  //   useEffect(() => {
-  //     if (userInfo) {
-  //       history.push('/')
-  //     }
-  //   }, [history, userInfo])
+  useEffect(() => {
+    if (userInfo) {
+      history.push('/')
+    }
+  }, [history, userInfo])
 
-  //   const submitHandler = (e) => {
-  //       e.preventDefault();
-
-  //       if(password !== confirmPassword ) {
-  //           setMessage("Passwords did not match")
-  //       }else {
-
-  //       }
-  //   }
   const submitHandler = (e) => {
     e.preventDefault()
+
+    if (password !== confirmPassword) {
+      setMessage('Passwords did not match')
+    } else {
+      dispatch(register(name, email, password))
+    }
   }
 
   return (
     <FormContainer>
       <h1>Sign up</h1>
 
-      {/* {loading && <Loader />} 
-      {error && <Message variant='danger'>{message}</Message>} */}
+      {loading && <Loader />}
+      {error && <Message variant="danger">{error}</Message> }
+      {message && <Message variant='danger'>{message}</Message>}
 
       <Form onSubmit={submitHandler}>
+        <Form.Group controlId='name'>
+          <Form.Label>Name</Form.Label>
+          <Form.Control
+            placeholder='Enter name'
+            type='name'
+            onChange={(e) => setName(e.target.value)}
+            value={name}
+          />
+        </Form.Group>
         <Form.Group controlId='email'>
           <Form.Label>Email</Form.Label>
           <Form.Control
@@ -72,14 +81,16 @@ const RegisterScreen = ({ history }) => {
           />
         </Form.Group>
         <Form.Group>
-          <Button type='submit' variant='primary' style={{ marginTop: '2rem'}}>
+          <Button type='submit' variant='primary' style={{ marginTop: '2rem' }} className="form-btn">
             Register
           </Button>
         </Form.Group>
       </Form>
 
       <Row className='py-3'>
-        <span>Already have an account? <Link to='/login'>Login</Link></span>
+        <span>
+          Already have an account? <Link to='/login' className="form-link">Login</Link>
+        </span>
       </Row>
     </FormContainer>
   )
