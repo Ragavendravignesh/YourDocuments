@@ -8,6 +8,7 @@ import HomeScreen from './screens/HomeScreen/HomeScreen';
 import RegisterScreen from './screens/RegisterScreen/RegisterScreen';
 import LoginScreen from './screens/LoginScreen/LoginScreen';
 import ProfileScreen from './screens/ProfileScreen/ProfileScreen'
+import IndentScreen from './screens/IndentScreen/IndentScreen';
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
           <Route path='/register' component={RegisterScreen} />
           <Route path='/login' component={LoginScreen}/>
           <Route path='/profile' component={ProfileScreen} /> 
+          <Route path='/indent' component={IndentScreen} />
         </Container>
       </main>
       <Footer />

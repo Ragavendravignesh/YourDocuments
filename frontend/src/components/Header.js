@@ -16,6 +16,8 @@ const Header = () => {
     return word[0].toUpperCase() + word.slice(1)
   }
 
+  console.log(userInfo.isAdmin)
+
   const dispatch = useDispatch()
   return (
     <header>
@@ -33,6 +35,13 @@ const Header = () => {
           <Navbar.Toggle aria-controls='basic-nabar-nav' />
           <Navbar.Collapse id='basic-nabar-nav'>
             <Nav className='ms-auto'>
+              {userInfo && userInfo.isAdmin && (
+                <LinkContainer to='/indent'>
+                  <Nav.Link>
+                    <i className='fas fa-analytics'></i>Indent
+                  </Nav.Link>
+                </LinkContainer>
+              )}
               {userInfo ? (
                 <NavDropdown
                   title={capitiliseFirstLetter(userInfo.name)}

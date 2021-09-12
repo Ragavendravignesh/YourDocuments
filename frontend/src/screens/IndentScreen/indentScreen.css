@@ -1,0 +1,16 @@
+.indent-form-spacing {
+    margin-top: 2rem;
+}
+
+.indent-row-spacing {
+    margin-top: 0.5rem;
+}
+
+.indent-field {
+    color: #800080;
+}
+
+.indent-card-spacing {
+    margin: 1rem 0;
+    border-radius: 0.4rem;
+}
