@@ -20,7 +20,7 @@ const LoginScreen = ({ history }) => {
     if (userInfo) {
       history.push('/')
     }
-  }, [userInfo])
+  }, [userInfo, history])
 
   const submitHandler = (e) => {
     e.preventDefault()
@@ -30,6 +30,7 @@ const LoginScreen = ({ history }) => {
 
   return (
     <FormContainer>
+      <h3 className="form-heading">Login</h3>
       {loading && <Loader />}
       {error && <Message variant='danger'>{error}</Message>}
       <Form onSubmit={submitHandler}>

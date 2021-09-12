@@ -7,7 +7,6 @@ import { logout } from '../actions/userActions'
 const Header = () => {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
-  console.log(userInfo)
 
   const logoutHandler = () => {
     dispatch(logout())

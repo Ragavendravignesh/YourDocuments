@@ -37,7 +37,7 @@ const RegisterScreen = ({ history }) => {
 
   return (
     <FormContainer>
-      <h1>Sign up</h1>
+      <h3 className="form-heading">Sign up</h3>
 
       {loading && <Loader />}
       {error && <Message variant="danger">{error}</Message> }
