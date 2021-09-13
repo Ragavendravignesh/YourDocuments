@@ -240,8 +240,16 @@ const IndentScreen = () => {
     setActualTotal(0);
   }
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior:'smooth'
+    });
+  }
+
   useEffect(() => {
     resetFields();
+    scrollToTop();
   }, [success]) 
 
   return (
