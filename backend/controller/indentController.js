@@ -69,15 +69,15 @@ const deleteIndent = asyncHandler(async (req, res) => {
 
 const addIndent = asyncHandler(async (req, res) => {
     const { tenCount, tewntyCount, fiftyCount, 
-        hundredCount, fiveThousandCount, 
-        thousandCount, tenThousandCount,
+        hundredCount, fiveHundredCount, thousandCount, fiveThousandCount, 
+        tenThousandCount,
     fifteenThousandCount, totalBalance, totalDiscount, actualBalance, indentDate } = req.body;
 
     const newIndent = new Indent({ tenCount, tewntyCount, fiftyCount, 
-        hundredCount, fiveThousandCount, 
+        hundredCount, fiveHundredCount, fiveThousandCount, 
         thousandCount, tenThousandCount,
     fifteenThousandCount, totalBalance, totalDiscount, actualBalance, indentDate  });
-
+    
     try {
         const indent = await Indent.create(newIndent);
 

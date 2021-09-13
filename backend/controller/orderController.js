@@ -3,8 +3,6 @@ import asyncHandler from 'express-async-handler';
 
 const addOrder = asyncHandler(async (req, res) => {
     const { amount, date, message } = req.body;
-
-    console.log(req.user._id);
     const newData = new Order({
         user: req.user._id,
         amount,

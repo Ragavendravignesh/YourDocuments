@@ -16,8 +16,6 @@ const Header = () => {
     return word[0].toUpperCase() + word.slice(1)
   }
 
-  console.log(userInfo.isAdmin)
-
   const dispatch = useDispatch()
   return (
     <header>

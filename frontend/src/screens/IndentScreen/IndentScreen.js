@@ -14,6 +14,9 @@ import {
   TEN_THOUSAND_RATE,
   FIFTEEN_THOUSAND_RATE,
 } from './commisionRates'
+import { addIndent } from '../../actions/indentActions'
+import Message from '../../components/Message'
+import Loader from '../../components/Loader'
 
 const IndentScreen = () => {
   const [tenCount, setTenCount] = useState(0)
@@ -34,7 +37,7 @@ const IndentScreen = () => {
 
   const [fiveHundredCount, setFiveHundredCount] = useState(0)
   const [fiveHundredValue, setFiveHundredValue] = useState(0)
-  const [fiveHundredComn, setFIveHundredComn] = useState(0)
+  const [fiveHundredComn, setFiveHundredComn] = useState(0)
 
   const [thousandCount, setThousandCount] = useState(0)
   const [thousandValue, setThousandValue] = useState(0)
@@ -52,15 +55,14 @@ const IndentScreen = () => {
   const [fifteenThousandValue, setFifteenThousandValue] = useState(0)
   const [fifteenThousandComn, setFifteenThousandComn] = useState(0)
 
-  const [total, setTotal ] = useState(0)
-  const [commission, setCommission ] = useState(0);
-  const [actualTotal, setActualTotal ] = useState(0);
+  const [total, setTotal] = useState(0)
+  const [commission, setCommission] = useState(0)
+  const [actualTotal, setActualTotal] = useState(0)
 
   const dispatch = useDispatch()
 
-  const submitHandler = () => {
-    console.log('Hi')
-  }
+  const indentAdd = useSelector((state) => state.indentAdd)
+  const { loading, error, success } = indentAdd
 
   const roundOff = (value) => {
     return Math.round((value + Number.EPSILON) * 100) / 100
@@ -79,79 +81,178 @@ const IndentScreen = () => {
   }
 
   const calculateFifty = (value) => {
-    setFiftyCount(value);
-    setFiftyComn(roundOff(value * FIFTY_RATE));
-    setFiftyValue(roundOff(50*value) - roundOff(value * FIFTY_RATE));
+    setFiftyCount(value)
+    setFiftyComn(roundOff(value * FIFTY_RATE))
+    setFiftyValue(roundOff(50 * value) - roundOff(value * FIFTY_RATE))
   }
 
   const calculateHundred = (value) => {
-    setHundredCount(value);
-    setHundredComn(roundOff(value * HUNDRED_RATE ));
-    setHundredValue(roundOff(100 * value) - roundOff(value * HUNDRED_RATE));
+    setHundredCount(value)
+    setHundredComn(roundOff(value * HUNDRED_RATE))
+    setHundredValue(roundOff(100 * value) - roundOff(value * HUNDRED_RATE))
   }
 
   const calculateFiveHundred = (value) => {
-    setFiveHundredCount(value);
-    setFIveHundredComn(roundOff(value * FIVE_HUNDRED_RATE));
-    setFiveHundredValue(roundOff(500 * value) - roundOff(value * FIVE_HUNDRED_RATE));
+    setFiveHundredCount(value)
+    setFiveHundredComn(roundOff(value * FIVE_HUNDRED_RATE))
+    setFiveHundredValue(
+      roundOff(500 * value) - roundOff(value * FIVE_HUNDRED_RATE)
+    )
   }
 
   const calculateThousand = (value) => {
-    setThousandCount(value);
-    setThousandComn(roundOff(value * THOUSAND_RATE));
-    setThousandValue(roundOff(1000 * value) - roundOff(value * THOUSAND_RATE));
+    setThousandCount(value)
+    setThousandComn(roundOff(value * THOUSAND_RATE))
+    setThousandValue(roundOff(1000 * value) - roundOff(value * THOUSAND_RATE))
   }
 
   const calculateFiveThousand = (value) => {
-    setFiveThousandCount(value);
-    setFiveThousandComn(roundOff(value * FIVE_THOUSAND_RATE));
-    setFiveThousandValue(roundOff(5000 * value ) - roundOff(value * FIVE_THOUSAND_RATE))
+    setFiveThousandCount(value)
+    setFiveThousandComn(roundOff(value * FIVE_THOUSAND_RATE))
+    setFiveThousandValue(
+      roundOff(5000 * value) - roundOff(value * FIVE_THOUSAND_RATE)
+    )
   }
 
   const calculateTenThousand = (value) => {
-    setTenThousandCount(value);
-    setTenThousandComn(roundOff(value * TEN_THOUSAND_RATE));
-    setTenThousandValue(roundOff(10000 * value ) - roundOff(value * TEN_THOUSAND_RATE))
+    setTenThousandCount(value)
+    setTenThousandComn(roundOff(value * TEN_THOUSAND_RATE))
+    setTenThousandValue(
+      roundOff(10000 * value) - roundOff(value * TEN_THOUSAND_RATE)
+    )
   }
 
   const calculateFifteenThousand = (value) => {
-    setFifteenThousandCount(value);
+    setFifteenThousandCount(value)
     setFifteenThousandComn(roundOff(value * FIFTEEN_THOUSAND_RATE))
-    setFifteenThousandValue(roundOff(15000 * value) - roundOff(value * FIFTEEN_THOUSAND_RATE))
+    setFifteenThousandValue(
+      roundOff(15000 * value) - roundOff(value * FIFTEEN_THOUSAND_RATE)
+    )
   }
 
   const calculateActualTotal = () => {
-    const total = tenValue + twentyValue + fiftyValue + hundredValue + fiveHundredValue+ thousandValue + fiveThousandValue + tenThousandValue + fifteenThousandValue;
+    const total =
+      tenValue +
+      twentyValue +
+      fiftyValue +
+      hundredValue +
+      fiveHundredValue +
+      thousandValue +
+      fiveThousandValue +
+      tenThousandValue +
+      fifteenThousandValue
 
-    setTotal(total);
-    return total;
-  }
-
-  const calculateCommision = () => {
-    const totalComn = tenComn + twentyComn + fiftyComn + hundredComn + fiveHundredComn + thousandComn + fiveThousandComn + tenThousandComn + fifteenThousandComn;
-    
-    setCommission(totalComn);
-    return totalComn;
-  }
-
-  const calculateTotal = () => {
-    const total = roundOff((tenCount * 10) + (twentyCount * 20 ) + (fiftyCount * 50) + (hundredCount * 100) + (fiveHundredCount * 500) + (thousandCount * 1000) + (fiveThousandCount * 5000) + (tenThousandCount * 10000) + (fifteenThousandCount * 15000));
-
-    setActualTotal(total);
-
+    setTotal(total)
     return total
   }
 
-  const calculate = () => {
-    calculateActualTotal();
-    calculateTotal();
-    calculateCommision();
+  const calculateCommision = () => {
+    const totalComn =
+      tenComn +
+      twentyComn +
+      fiftyComn +
+      hundredComn +
+      fiveHundredComn +
+      thousandComn +
+      fiveThousandComn +
+      tenThousandComn +
+      fifteenThousandComn
+
+    setCommission(totalComn)
+    return totalComn.toFixed(2)
   }
+
+  const calculateTotal = () => {
+    const total = roundOff(
+      tenCount * 10 +
+        twentyCount * 20 +
+        fiftyCount * 50 +
+        hundredCount * 100 +
+        fiveHundredCount * 500 +
+        thousandCount * 1000 +
+        fiveThousandCount * 5000 +
+        tenThousandCount * 10000 +
+        fifteenThousandCount * 15000
+    )
+
+    setActualTotal(total)
+
+    return total.toFixed(2)
+  }
+
+  const calculate = () => {
+    calculateActualTotal()
+    calculateTotal()
+    calculateCommision()
+  }
+
+  const submitHandler = (e) => {
+    e.preventDefault()
+
+    const indent = {
+      tenCount: Number(tenCount),
+      twentyCount: Number(twentyCount),
+      fiftyCount: Number(fiftyCount),
+      hundredCount: Number(hundredCount),
+      fiveHundredCount: Number(fiveHundredCount),
+      thousandCount: Number(thousandCount),
+      fiveThousandCount: Number(fiveThousandCount),
+      tenThousandCount: Number(tenThousandCount),
+      fifteenThousandCount: Number(fifteenThousandCount),
+      totalBalance: actualTotal,
+      totalDiscount: commission,
+      actualBalance: total,
+    }
+
+    dispatch(addIndent(indent))
+  }
+
+  const resetFields = () => {
+    setTenCount(0);
+    setTenValue(0);
+    setTenComn(0);
+    setTwentyCount(0);
+    setTwentyValue(0);
+    setTwentyComn(0);
+    setFiftyCount(0);
+    setFiftyValue(0);
+    setFiftyComn(0);
+    setHundredCount(0);
+    setHundredValue(0);
+    setHundredComn(0);
+    setFiveHundredCount(0);
+    setFiveHundredValue(0);
+    setFiveHundredComn(0);
+    setThousandCount(0);
+    setThousandValue(0);
+    setThousandComn(0);
+    setFiveThousandCount(0);
+    setFiveThousandValue(0);
+    setFiveThousandComn(0);
+    setTenThousandCount(0);
+    setTenThousandValue(0);
+    setTenThousandComn(0);
+    setFifteenThousandCount(0);
+    setFifteenThousandValue(0);
+    setFifteenThousandComn(0);
+    setTotal(0);
+    setCommission(0);
+    setActualTotal(0);
+  }
+
+  useEffect(() => {
+    resetFields();
+  }, [success]) 
 
   return (
     <FormContainer>
       <h3 className='form-heading'>Indent Form</h3>
-      <Form onSubmit={submitHandler} className='indent-form-spacing'>
+
+      {loading && <Loader />}
+      {success && <Message variant='success'>Indent added</Message>}
+      {error && <Message variant='danger'>{error}</Message>}
+
+      <Form className='indent-form-spacing'>
         <Row>
           <Col>
             <h4>Rupees</h4>
@@ -390,16 +491,25 @@ const IndentScreen = () => {
         </Row>
       </Form>
 
-      <Card className="indent-card-spacing">
+      <Card className='indent-card-spacing'>
         <Card.Body>
-          <h4>Actual Total: <span className="indent-field">{actualTotal}</span></h4>
-          <h4>Commision: <span className="indent-field">{commission}</span></h4>
-          <h4>Caculated Total: <span className="indent-field">{total}</span></h4>
+          <h4>
+            Actual Total: <span className='indent-field'>{actualTotal}</span>
+          </h4>
+          <h4>
+            Commision: <span className='indent-field'>{commission}</span>
+          </h4>
+          <h4>
+            Caculated Total: <span className='indent-field'>{total}</span>
+          </h4>
         </Card.Body>
       </Card>
-      <Button variant='primary' className='form-green-btn'>Store</Button>
-      <Button variant='primary' className='form-btn ms-2' onClick={calculate}>Calculate</Button>
-      
+      <Button variant='primary' className='form-green-btn' onClick={(e) => submitHandler(e)}>
+        Store
+      </Button>
+      <Button variant='primary' className='form-btn ms-2' onClick={calculate}>
+        Calculate
+      </Button>
     </FormContainer>
   )
 }
