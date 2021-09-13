@@ -9,6 +9,7 @@ import RegisterScreen from './screens/RegisterScreen/RegisterScreen';
 import LoginScreen from './screens/LoginScreen/LoginScreen';
 import ProfileScreen from './screens/ProfileScreen/ProfileScreen'
 import IndentScreen from './screens/IndentScreen/IndentScreen';
+import ShowIndentScreen from './screens/ShowIndentScreen/ShowIndentScreen';
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
           <Route path='/login' component={LoginScreen}/>
           <Route path='/profile' component={ProfileScreen} /> 
           <Route path='/indent' component={IndentScreen} />
+          <Route path='/show/indent' component={ShowIndentScreen} />
         </Container>
       </main>
       <Footer />

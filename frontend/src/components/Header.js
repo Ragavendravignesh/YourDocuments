@@ -34,11 +34,14 @@ const Header = () => {
           <Navbar.Collapse id='basic-nabar-nav'>
             <Nav className='ms-auto'>
               {userInfo && userInfo.isAdmin && (
-                <LinkContainer to='/indent'>
-                  <Nav.Link>
-                    <i className='fas fa-analytics'></i>Indent
-                  </Nav.Link>
-                </LinkContainer>
+                <NavDropdown title='Indent' id='username'>
+                  <LinkContainer to='/indent'>
+                    <NavDropdown.Item>Indent calc</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to='/show/indent'>
+                    <NavDropdown.Item>Show Indents</NavDropdown.Item>
+                  </LinkContainer>
+                </NavDropdown>
               )}
               {userInfo ? (
                 <NavDropdown
