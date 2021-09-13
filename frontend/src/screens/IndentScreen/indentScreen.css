@@ -10,7 +10,9 @@
     color: #800080;
 }
 
-.indent-card-spacing {
+.indent-card {
     margin: 1rem 0;
+    background: #800080;
+    color: #fff;
     border-radius: 0.4rem;
 }

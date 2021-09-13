@@ -1,8 +1,9 @@
 .top-spacing {
-    margin-top: 5rem;
+    margin: 4rem 0;
 }
 
 .form-box {
     padding: 0.6rem;
     background: #800080;
+    border-radius: 5px;
 }

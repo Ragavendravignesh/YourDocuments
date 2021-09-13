@@ -3,6 +3,9 @@ import {
   INDENT_ADD_REQUEST,
   INDENT_ADD_SUCCESS,
   INDENT_ADD_FAIL,
+  INDENT_GETALL_REQUEST,
+  INDENT_GETALL_SUCCESS,
+  INDENT_GETALL_FAIL
 } from '../constants/indentConstants'
 
 export const addIndent = (indent) => async (dispatch, getState) => {
@@ -32,4 +35,11 @@ export const addIndent = (indent) => async (dispatch, getState) => {
           : error.response,
     })
   }
+}
+
+export const getAllIndents = () => async (dispatch, getState) => {
+    try {
+
+    } catch(error) {
+    }
 }

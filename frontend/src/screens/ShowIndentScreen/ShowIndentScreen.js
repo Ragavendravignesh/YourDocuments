@@ -8,7 +8,7 @@ const ShowIndentScreen = () => {
   const [date, setDate] = useState();
 
   const dispatch = useDispatch();
-  
+
   const submitHandler = () => {
     console.log('Hi')
   }
@@ -16,7 +16,7 @@ const ShowIndentScreen = () => {
   return (
     <Container className='top-spacing'>
       <Form onSubmit={submitHandler}>
-        <Row className='justify-content-md-center form-box '>
+        <Row className='form-box '>
           <Col>
             <Form.Group>
               <Form.Control
@@ -27,7 +27,7 @@ const ShowIndentScreen = () => {
             </Form.Group>
           </Col>
           <Col>
-            <Button type='submit' variant='outline-secondary'>
+            <Button type='submit' variant='outline-light'>
               Search
             </Button>
           </Col>

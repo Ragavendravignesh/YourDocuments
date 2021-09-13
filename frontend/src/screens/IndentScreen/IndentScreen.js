@@ -208,49 +208,49 @@ const IndentScreen = () => {
   }
 
   const resetFields = () => {
-    setTenCount(0);
-    setTenValue(0);
-    setTenComn(0);
-    setTwentyCount(0);
-    setTwentyValue(0);
-    setTwentyComn(0);
-    setFiftyCount(0);
-    setFiftyValue(0);
-    setFiftyComn(0);
-    setHundredCount(0);
-    setHundredValue(0);
-    setHundredComn(0);
-    setFiveHundredCount(0);
-    setFiveHundredValue(0);
-    setFiveHundredComn(0);
-    setThousandCount(0);
-    setThousandValue(0);
-    setThousandComn(0);
-    setFiveThousandCount(0);
-    setFiveThousandValue(0);
-    setFiveThousandComn(0);
-    setTenThousandCount(0);
-    setTenThousandValue(0);
-    setTenThousandComn(0);
-    setFifteenThousandCount(0);
-    setFifteenThousandValue(0);
-    setFifteenThousandComn(0);
-    setTotal(0);
-    setCommission(0);
-    setActualTotal(0);
+    setTenCount(0)
+    setTenValue(0)
+    setTenComn(0)
+    setTwentyCount(0)
+    setTwentyValue(0)
+    setTwentyComn(0)
+    setFiftyCount(0)
+    setFiftyValue(0)
+    setFiftyComn(0)
+    setHundredCount(0)
+    setHundredValue(0)
+    setHundredComn(0)
+    setFiveHundredCount(0)
+    setFiveHundredValue(0)
+    setFiveHundredComn(0)
+    setThousandCount(0)
+    setThousandValue(0)
+    setThousandComn(0)
+    setFiveThousandCount(0)
+    setFiveThousandValue(0)
+    setFiveThousandComn(0)
+    setTenThousandCount(0)
+    setTenThousandValue(0)
+    setTenThousandComn(0)
+    setFifteenThousandCount(0)
+    setFifteenThousandValue(0)
+    setFifteenThousandComn(0)
+    setTotal(0)
+    setCommission(0)
+    setActualTotal(0)
   }
 
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior:'smooth'
-    });
+      behavior: 'smooth',
+    })
   }
 
   useEffect(() => {
-    resetFields();
-    scrollToTop();
-  }, [success]) 
+    resetFields()
+    scrollToTop()
+  }, [success])
 
   return (
     <FormContainer>
@@ -499,20 +499,25 @@ const IndentScreen = () => {
         </Row>
       </Form>
 
-      <Card className='indent-card-spacing'>
+      <Card className='indent-card'>
         <Card.Body>
-          <h4>
-            Actual Total: <span className='indent-field'>{actualTotal}</span>
-          </h4>
-          <h4>
-            Commision: <span className='indent-field'>{commission}</span>
-          </h4>
-          <h4>
-            Caculated Total: <span className='indent-field'>{total}</span>
-          </h4>
+          <Row>
+            <Col>
+              <h4>Actual Total: {actualTotal}</h4>
+              <h4>Commision: {commission}</h4>
+              <h4>Caculated Total: {total}</h4>
+            </Col>
+            <Col xs={4} md={3}>
+              <i className="fas fa-calculator fa-5x"></i>
+            </Col>
+          </Row>
         </Card.Body>
       </Card>
-      <Button variant='primary' className='form-green-btn' onClick={(e) => submitHandler(e)}>
+      <Button
+        variant='primary'
+        className='form-green-btn'
+        onClick={(e) => submitHandler(e)}
+      >
         Store
       </Button>
       <Button variant='primary' className='form-btn ms-2' onClick={calculate}>
