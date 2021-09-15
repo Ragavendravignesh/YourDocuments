@@ -41,7 +41,7 @@ export const getAllIndents = () => async (dispatch, getState) => {
   try {
     dispatch({ type: INDENT_GETALL_REQUEST })
 
-    const { userLogin: userInfo } = getState()
+    const { userLogin: { userInfo } } = getState()
 
     const config = {
       headers: {
@@ -50,8 +50,9 @@ export const getAllIndents = () => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.get('/', config)
+    const { data } = await axios.get('/api/indents/', config)
 
+    console.log(data);
     dispatch({ type: INDENT_GETALL_SUCCESS, payload: data })
   } catch (error) {
     dispatch({

@@ -20,7 +20,7 @@ export const indentAddReducer = (state = {}, action) => {
   }
 }
 
-export const indentGetAllReducer = (state = {}, action) => {
+export const indentGetAllReducer = (state = { indents: [] }, action) => {
   switch (action.type) {
     case INDENT_GETALL_REQUEST:
       return { loading: true }

@@ -507,7 +507,7 @@ const IndentScreen = () => {
               <h4>Commision: {commission}</h4>
               <h4>Caculated Total: {total}</h4>
             </Col>
-            <Col xs={4} md={3}>
+            <Col xs={4} md={4} lg={3}>
               <i className="fas fa-calculator fa-5x"></i>
             </Col>
           </Row>
