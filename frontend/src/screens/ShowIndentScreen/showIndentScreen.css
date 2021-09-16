@@ -1,9 +1,30 @@
 .top-spacing {
-    margin: 4rem 0;
+  margin: 4rem 0;
 }
 
 .form-box {
-    padding: 0.6rem;
-    background: #800080;
-    border-radius: 5px;
+  padding: 0.6rem;
+  background: #800080;
+  border-radius: 5px;
+}
+
+.display-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 0.5rem;
+}
+/* 
+a {
+ text-decoration: none;
+ color:#fff;
+}
+
+a:hover {
+ color:#fff;
+} */
+
+@media (max-width: 768px) {
+  .display-grid {
+    grid-template-columns: 1fr;
+  }
 }
