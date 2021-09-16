@@ -29,7 +29,7 @@ const ProfileScreen = ({ history }) => {
     if (!userInfo) {
       history.push('/login')
     } else {
-      if (user && !user.name || success) {
+      if ((user && !user.name) || success) {
         dispatch({ type : USER_UPDATE_RESET })
         dispatch(getUserDetails('profile'))
       } else {
@@ -37,7 +37,7 @@ const ProfileScreen = ({ history }) => {
         user && setEmail(user.email)
       }
     }
-  }, [dispatch, history, user, userInfo])
+  }, [dispatch, history, user, userInfo, success])
 
   const updateHandler = (e) => {
     e.preventDefault()

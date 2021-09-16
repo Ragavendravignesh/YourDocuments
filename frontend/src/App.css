@@ -1,41 +1,43 @@
 .form-btn {
-    background:#800080;
-    color: #fff;
-    border: none;
+  background: #800080;
+  color: #fff;
+  border: none;
 }
 
-.form-btn:hover, .form-btn:active {
-    background: #400040;
+.form-btn:hover,
+.form-btn:active {
+  background: #400040;
 }
 
 .form-link {
-    color: #800080;
+  color: #800080;
 }
 
-.form-link:hover, .form-link:active {
-    color: #400040;
+.form-link:hover,
+.form-link:active {
+  color: #400040;
 }
 
 .form-heading {
-    color: #800080;
+  color: #800080;
 }
 
 .form-green-btn {
-    background:#006200;
-    color: #fff;
-    border: none;
+  background: #006200;
+  color: #fff;
+  border: none;
 }
 
-.form-green-btn:hover, .form-green-btn:active {
-    background: #009d00;
+.form-green-btn:hover,
+.form-green-btn:active {
+  background: #009d00;
 }
 
 .shadow {
-    box-shadow: 2px 5px #aaaaaa;
+  box-shadow: 2px 5px #aaaaaa;
 }
 
-.shadow:active{
-    box-shadow:1px 3px #aaaaaa;
-    transform: translateY(3px);
+.shadow:active {
+  box-shadow: 1px 3px #aaaaaa;
+  transform: translateY(3px);
 }
-

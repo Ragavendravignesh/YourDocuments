@@ -1,3 +1,10 @@
+.indent-date-card {
+  background: #800080;
+  color: #fff;
+  border-radius: 0.4rem;
+  border-left: 5px dotted #fff;
+}
+
 .indent-content {
-    padding: 1rem;
+  padding: 1rem;
 }

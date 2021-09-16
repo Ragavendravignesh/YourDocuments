@@ -25,7 +25,7 @@ const getIndentByDate = asyncHandler(async (req, res) => {
   }
 })
 
-const getIndentById = asyncHandler(async (req, res) => {yield
+const getIndentById = asyncHandler(async (req, res) => {
   try {
     const indent = await Indent.findById(req.params.id)
 

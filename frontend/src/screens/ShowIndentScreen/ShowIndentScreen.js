@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap'
+import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import { getAllIndents } from '../../actions/indentActions'
 import Loader from '../../components/Loader'
 import Message from '../../components/Message'
 import IndentCard from '../../components/IndentCard/IndentCard'
-import { Link } from 'react-router-dom'
 import './showIndentScreen.css'
-import { LinkContainer } from 'react-router-bootstrap'
 
 const ShowIndentScreen = () => {
   const [date, setDate] = useState()
@@ -18,7 +16,7 @@ const ShowIndentScreen = () => {
 
   useEffect(() => {
     dispatch(getAllIndents())
-  }, [])
+  }, [dispatch])
 
   const submitHandler = () => {
     console.log('Hi')
@@ -54,12 +52,12 @@ const ShowIndentScreen = () => {
         <div className='display-grid'>
           {indents &&
             indents.length &&
-            indents.map((indent, idx) => (
-                <IndentCard id={indent._id} date={formatDate(indent.indentDate)} balance={indent.totalBalance} />
-              // <Card key={idx} className="shadow">
-              //   <h2>{formatDate(indent.indentDate)}</h2>
-              //   <h1>{indent.totalBalance}</h1>
-              // </Card>
+            indents.map((indent) => (
+              <IndentCard
+                id={indent._id}
+                date={formatDate(indent.indentDate)}
+                balance={indent.totalBalance}
+              />
             ))}
         </div>
       </div>
