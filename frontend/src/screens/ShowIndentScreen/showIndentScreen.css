@@ -13,15 +13,6 @@
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 0.5rem;
 }
-/* 
-a {
- text-decoration: none;
- color:#fff;
-}
-
-a:hover {
- color:#fff;
-} */
 
 @media (max-width: 768px) {
   .display-grid {
