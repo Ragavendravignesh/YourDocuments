@@ -10,6 +10,7 @@ import LoginScreen from './screens/LoginScreen/LoginScreen';
 import ProfileScreen from './screens/ProfileScreen/ProfileScreen'
 import IndentScreen from './screens/IndentScreen/IndentScreen';
 import ShowIndentScreen from './screens/ShowIndentScreen/ShowIndentScreen';
+import ShowSingleIndentScreen from './screens/ShowSingleIndent/ShowSingleIndentScreen';
 
 const App = () => {
   return (
@@ -22,7 +23,8 @@ const App = () => {
           <Route path='/login' component={LoginScreen}/>
           <Route path='/profile' component={ProfileScreen} /> 
           <Route path='/indent' component={IndentScreen} />
-          <Route path='/show/indent' component={ShowIndentScreen} />
+          <Route path='/show/indent' component={ShowIndentScreen} exact/>
+          <Route path='/show/indent/:id' component={ShowSingleIndentScreen}/>
         </Container>
       </main>
       <Footer />

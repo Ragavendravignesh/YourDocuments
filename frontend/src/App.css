@@ -4,7 +4,7 @@
     border: none;
 }
 
-.form-btn:hover {
+.form-btn:hover, .form-btn:active {
     background: #400040;
 }
 
@@ -12,7 +12,7 @@
     color: #800080;
 }
 
-.form-link:hover {
+.form-link:hover, .form-link:active {
     color: #400040;
 }
 
@@ -26,7 +26,16 @@
     border: none;
 }
 
-.form-green-btn:hover {
+.form-green-btn:hover, .form-green-btn:active {
     background: #009d00;
+}
+
+.shadow {
+    box-shadow: 2px 5px #aaaaaa;
+}
+
+.shadow:active{
+    box-shadow:1px 3px #aaaaaa;
+    transform: translateY(3px);
 }
 
