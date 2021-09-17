@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getIndentById } from '../../actions/indentActions'
+import { getIndentById, updateIndent } from '../../actions/indentActions'
 import FormContainer from '../../components/FormContainer'
 import Message from '../../components/Message'
 import Loader from '../../components/Loader'
@@ -10,8 +10,13 @@ import './showSingleIndentScreen.css'
 
 const ShowSingleIndentScreen = ({ match }) => {
   const indentId = match.params.id
+
   const indentGetById = useSelector((state) => state.indentGetById)
   const { loading, error, indent } = indentGetById
+
+  const indentUpdate = useSelector((state) => state.indentUpdate)
+  const { success } = indentUpdate
+
   const [edit, setEdit] = useState(true)
 
   const [indentDate, setIndentDate] = useState()
@@ -25,14 +30,14 @@ const ShowSingleIndentScreen = ({ match }) => {
   const [tenThousandCount, setTenThousandCount] = useState()
   const [fifteenThousandCount, setFifteenThousandCount] = useState()
   const [totalBalance, setTotalBalance] = useState()
-  const [totalDiscount,setTotalDiscount] = useState()
+  const [totalDiscount, setTotalDiscount] = useState()
   const [actualBalance, setActualBalance] = useState()
 
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(getIndentById(indentId))
-  }, [dispatch])
+  }, [dispatch, success])
 
   const formatDate = (value) => {
     return value.slice(0, value.indexOf('T'))
@@ -41,7 +46,24 @@ const ShowSingleIndentScreen = ({ match }) => {
   const submitHandler = (e) => {
     e.preventDefault()
 
-    console.log(indent._id)
+    const data = {
+      indentDate,
+      tenCount,
+      twentyCount,
+      fiftyCount,
+      hundredCount,
+      fiveHundredCount,
+      thousandCount,
+      fiveThousandCount,
+      tenThousandCount,
+      fifteenThousandCount,
+      totalBalance,
+      totalDiscount,
+      actualBalance,
+    }
+
+    setEdit(!edit);
+    dispatch(updateIndent(indentId, data))
   }
 
   return loading ? (
@@ -51,17 +73,20 @@ const ShowSingleIndentScreen = ({ match }) => {
   ) : (
     indent && (
       <FormContainer>
-          <Row>
-            <Col xs={8}>
+          {success && <Message variant='success'>Data Updated!</Message> }
+        <Row>
+          <Col xs={8}>
             <h3 className='form-heading'>Indent Details</h3>
-            </Col>
-            <Col xs={4}>
-                <Link to='/show/indent' className="link-btn">Back</Link>
-            </Col>
-          </Row>
-        
-        <Form onSubmit={submitHandler} style={{marginTop:'1rem'}}>
-        <Form.Group as={Row} className='mb-3' controlId='indentDate'>
+          </Col>
+          <Col xs={4}>
+            <Link to='/show/indent' className='link-btn'>
+              Back
+            </Link>
+          </Col>
+        </Row>
+
+        <Form onSubmit={submitHandler} style={{ marginTop: '1rem' }}>
+          <Form.Group as={Row} className='mb-3' controlId='indentDate'>
             <Form.Label column xs={7} sm={7} md={6} lg={6}>
               <h5>Date</h5>
             </Form.Label>
@@ -69,7 +94,9 @@ const ShowSingleIndentScreen = ({ match }) => {
               {!edit ? (
                 <Form.Control
                   type='date'
-                  value={indentDate ? indentDate : formatDate(indent.indentDate)}
+                  value={
+                    indentDate ? indentDate : formatDate(indent.indentDate)
+                  }
                   onChange={(e) => setIndentDate(e.target.value)}
                 />
               ) : (
@@ -159,7 +186,11 @@ const ShowSingleIndentScreen = ({ match }) => {
               {!edit ? (
                 <Form.Control
                   type='text'
-                  value={fiveHundredCount ? fiveHundredCount : indent.fiveHundredCount}
+                  value={
+                    fiveHundredCount
+                      ? fiveHundredCount
+                      : indent.fiveHundredCount
+                  }
                   onChange={(e) => setFiveHundredCount(e.target.value)}
                 />
               ) : (
@@ -195,7 +226,11 @@ const ShowSingleIndentScreen = ({ match }) => {
               {!edit ? (
                 <Form.Control
                   type='text'
-                  value={fiveThousandCount ? fiveThousandCount : indent.fiveThousandCount}
+                  value={
+                    fiveThousandCount
+                      ? fiveThousandCount
+                      : indent.fiveThousandCount
+                  }
                   onChange={(e) => setFiveThousandCount(e.target.value)}
                 />
               ) : (
@@ -213,7 +248,11 @@ const ShowSingleIndentScreen = ({ match }) => {
               {!edit ? (
                 <Form.Control
                   type='text'
-                  value={tenThousandCount ? tenThousandCount : indent.tenThousandCount}
+                  value={
+                    tenThousandCount
+                      ? tenThousandCount
+                      : indent.tenThousandCount
+                  }
                   onChange={(e) => setTenThousandCount(e.target.value)}
                 />
               ) : (
@@ -223,7 +262,11 @@ const ShowSingleIndentScreen = ({ match }) => {
               )}
             </Col>
           </Form.Group>
-          <Form.Group as={Row} className='mb-3' controlId='fifteenThousandCount'>
+          <Form.Group
+            as={Row}
+            className='mb-3'
+            controlId='fifteenThousandCount'
+          >
             <Form.Label column xs={7} sm={7} md={6} lg={6}>
               <h5>Fiteen Thousand count</h5>
             </Form.Label>
@@ -231,7 +274,11 @@ const ShowSingleIndentScreen = ({ match }) => {
               {!edit ? (
                 <Form.Control
                   type='text'
-                  value={fifteenThousandCount ? fifteenThousandCount : indent.fifteenThousandCount}
+                  value={
+                    fifteenThousandCount
+                      ? fifteenThousandCount
+                      : indent.fifteenThousandCount
+                  }
                   onChange={(e) => setFifteenThousandCount(e.target.value)}
                 />
               ) : (
@@ -241,7 +288,7 @@ const ShowSingleIndentScreen = ({ match }) => {
               )}
             </Col>
           </Form.Group>
-          <hr/>
+          <hr />
           <Form.Group as={Row} className='mb-3' controlId='totalBalance'>
             <Form.Label column xs={7} sm={7} md={6} lg={6}>
               <h5>Total Balance</h5>
@@ -296,7 +343,7 @@ const ShowSingleIndentScreen = ({ match }) => {
               )}
             </Col>
           </Form.Group>
-          <hr/>
+          <hr />
           {edit && (
             <Button
               onClick={() => {

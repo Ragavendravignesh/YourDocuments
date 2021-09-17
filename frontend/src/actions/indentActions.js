@@ -12,6 +12,9 @@ import {
   INDENT_GET_BY_ID_REQUEST,
   INDENT_GET_BY_ID_FAIL,
   INDENT_GET_BY_ID_SUCCESS,
+  INDENT_UPDATE_REQUEST,
+  INDENT_UPDATE_SUCCESS,
+  INDENT_UPDATE_FAIL
 } from '../constants/indentConstants'
 
 export const addIndent = (indent) => async (dispatch, getState) => {
@@ -72,9 +75,40 @@ export const getAllIndents = () => async (dispatch, getState) => {
   }
 }
 
-export const getIndentByDate = (date = '2021-09-15') => async (dispatch, getState) => {
+export const getIndentByDate =
+  (date = '2021-09-15') =>
+  async (dispatch, getState) => {
+    try {
+      dispatch({ type: INDENT_GET_BY_DATE_REQUEST })
+
+      const {
+        userLogin: { userInfo },
+      } = getState()
+
+      const config = {
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      }
+
+      const { data } = await axios.get(`/api/indents/date/${date}`, config)
+
+      dispatch({ type: INDENT_GET_BY_DATE_SUCCESS, payload: data })
+    } catch (error) {
+      dispatch({
+        type: INDENT_GET_BY_DATE_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      })
+    }
+  }
+
+export const getIndentById = (id) => async (dispatch, getState) => {
   try {
-    dispatch({ type: INDENT_GET_BY_DATE_REQUEST})
+    dispatch({ type: INDENT_GET_BY_ID_REQUEST })
 
     const {
       userLogin: { userInfo },
@@ -87,12 +121,12 @@ export const getIndentByDate = (date = '2021-09-15') => async (dispatch, getStat
       },
     }
 
-    const { data } = await axios.get(`/api/indents/date/${date}`, config)
-    
-    dispatch({ type: INDENT_GET_BY_DATE_SUCCESS, payload: data })
+    const { data } = await axios.get(`/api/indents/${id}`, config)
+
+    dispatch({ type: INDENT_GET_BY_ID_SUCCESS, payload: data })
   } catch (error) {
     dispatch({
-      type: INDENT_GET_BY_DATE_FAIL,
+      type: INDENT_GET_BY_ID_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
@@ -101,11 +135,11 @@ export const getIndentByDate = (date = '2021-09-15') => async (dispatch, getStat
   }
 }
 
-export const getIndentById = (id) => async (dispatch, getState) => {
+export const updateIndent = (id, value) => async (dispatch, getState) => {
   try {
-    dispatch({ type: INDENT_GET_BY_ID_REQUEST })
+    dispatch({ type: INDENT_UPDATE_REQUEST })
 
-    const {userLogin: { userInfo }} = getState();
+    const {userLogin: {userInfo }} = getState()
 
     const config = {
       headers: {
@@ -114,16 +148,16 @@ export const getIndentById = (id) => async (dispatch, getState) => {
       }
     }
 
-    const { data } = await axios.get(`/api/indents/${id}`, config);
+    const {data} = await axios.put(`/api/indents/${id}`, value ,config);
 
-    dispatch({ type: INDENT_GET_BY_ID_SUCCESS, payload: data});
+    dispatch({ type: INDENT_UPDATE_SUCCESS })
   } catch (error) {
     dispatch({
-      type: INDENT_GET_BY_ID_FAIL,
+      type: INDENT_UPDATE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
-          : error.message,
+          : error.message
     })
   }
 }

@@ -13,6 +13,7 @@ import {
   indentGetAllReducer,
   indentGetByDateReducer,
   indentGetByIdReducer,
+  indentUpdateReducer
 } from './reducers/indentReducer'
 
 const reducers = combineReducers({
@@ -24,6 +25,7 @@ const reducers = combineReducers({
   indentGet: indentGetAllReducer,
   indentGetByDate: indentGetByDateReducer,
   indentGetById: indentGetByIdReducer,
+  indentUpdate: indentUpdateReducer
 });
 
 const userInfoFromStorage = localStorage.getItem('userInfo')
