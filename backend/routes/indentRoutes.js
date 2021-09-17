@@ -16,7 +16,7 @@ router
   .get(protect, admin, getIndents)
   .post(protect, admin, addIndent)
 
-router.route('/date').get(protect, admin, getIndentByDate)
+router.route('/date/:date').get(protect, admin, getIndentByDate)
 
 router
   .route('/:id')

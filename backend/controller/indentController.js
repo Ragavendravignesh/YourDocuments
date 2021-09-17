@@ -8,13 +8,13 @@ const getIndents = asyncHandler(async (req, res) => {
 })
 
 const getIndentByDate = asyncHandler(async (req, res) => {
-  let inputDate = req.query.date
-
+  let inputDate = req.params.date
+  inputDate.concat("T00:00:00Z");
   try {
-    const indent = await Indent.find({ date: inputDate })
+    const indents = await Indent.find({ indentDate : { "$gte": inputDate }})
 
-    if (indent) {
-      res.json({ indent })
+    if (indents) {
+      res.json({ indents })
     } else {
       res.status(404)
       throw new Error('Sorry Indent not found')

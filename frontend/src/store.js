@@ -8,7 +8,12 @@ import {
   userRegisterReducer,
   userUpdateReducer,
 } from './reducers/userReducers'
-import { indentAddReducer, indentGetAllReducer } from './reducers/indentReducer'
+import {
+  indentAddReducer,
+  indentGetAllReducer,
+  indentGetByDateReducer,
+  indentGetByIdReducer,
+} from './reducers/indentReducer'
 
 const reducers = combineReducers({
   userLogin: userLoginReducer,
@@ -16,8 +21,10 @@ const reducers = combineReducers({
   userDetails: userDetailsReducer,
   userUpdate: userUpdateReducer,
   indentAdd: indentAddReducer,
-  indentGet: indentGetAllReducer
-})
+  indentGet: indentGetAllReducer,
+  indentGetByDate: indentGetByDateReducer,
+  indentGetById: indentGetByIdReducer,
+});
 
 const userInfoFromStorage = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo'))

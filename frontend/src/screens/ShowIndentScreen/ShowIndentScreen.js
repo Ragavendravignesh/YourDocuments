@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
-import { getAllIndents } from '../../actions/indentActions'
+import { getAllIndents, getIndentByDate } from '../../actions/indentActions'
 import Loader from '../../components/Loader'
 import Message from '../../components/Message'
 import IndentCard from '../../components/IndentCard/IndentCard'
@@ -9,21 +9,32 @@ import './showIndentScreen.css'
 
 const ShowIndentScreen = () => {
   const [date, setDate] = useState()
-
   const dispatch = useDispatch()
+
   const indentGet = useSelector((state) => state.indentGet)
-  const { loading, error, indents } = indentGet
+  let { loading, error, indents } = indentGet
+  const [indentArray, setIndentArray] = useState([])
+  const [NotFoundMessage, setNotFoundMessage] = useState()
+
+  const formatDate = (value) => {
+    return value.slice(0, value.indexOf('T'))
+  }
 
   useEffect(() => {
     dispatch(getAllIndents())
   }, [dispatch])
 
-  const submitHandler = () => {
-    console.log('Hi')
-  }
+  const submitHandler = (e) => {
+    e.preventDefault()
+    setNotFoundMessage('');
 
-  const formatDate = (value) => {
-    return value.slice(0, value.indexOf('T'))
+    const searchedValues = indents.filter((indent) => {
+      if (formatDate(indent.indentDate) == date) {
+        return indent
+      }
+    })
+    {!searchedValues.length && setNotFoundMessage('Sorry we couldn\'t find the indents on the speciifed date, Instead here we display all the indents.')}
+    setIndentArray(searchedValues)
   }
 
   return (
@@ -49,16 +60,29 @@ const ShowIndentScreen = () => {
       <div style={{ marginTop: '1rem' }}>
         {loading && <Loader />}
         {error && <Message variant='danger'>{error}</Message>}
+        {NotFoundMessage && <Message variant='danger'>{NotFoundMessage}</Message>}
         <div className='display-grid'>
-          {indents &&
+          {!indentArray.length &&
+            indents &&
             indents.length &&
-            indents.map((indent) => (
+            indents.map((indent, idx) => (
               <IndentCard
+                key={idx}
                 id={indent._id}
                 date={formatDate(indent.indentDate)}
                 balance={indent.totalBalance}
               />
             ))}
+          {indentArray &&
+            indentArray.length ?
+            indentArray.map((indent, idx) => (
+              <IndentCard
+                key={idx}
+                id={indent._id}
+                date={formatDate(indent.indentDate)}
+                balance={indent.totalBalance}
+              />
+            )):undefined}
         </div>
       </div>
     </Container>
