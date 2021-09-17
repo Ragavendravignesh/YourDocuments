@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
-import { getAllIndents, getIndentByDate } from '../../actions/indentActions'
+import { getAllIndents } from '../../actions/indentActions'
 import Loader from '../../components/Loader'
 import Message from '../../components/Message'
 import IndentCard from '../../components/IndentCard/IndentCard'
@@ -29,7 +29,7 @@ const ShowIndentScreen = () => {
     setNotFoundMessage('');
 
     const searchedValues = indents.filter((indent) => {
-      if (formatDate(indent.indentDate) == date) {
+      if (formatDate(indent.indentDate) === date) {
         return indent
       }
     })

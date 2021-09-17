@@ -27,7 +27,10 @@ export const indentAddReducer = (state = {}, action) => {
   }
 }
 
-export const indentGetAllReducer = (state = { indents:[], indentDate:[] }, action) => {
+export const indentGetAllReducer = (
+  state = { indents: [], indentDate: [] },
+  action
+) => {
   switch (action.type) {
     case INDENT_GETALL_REQUEST:
       return { loading: true }
@@ -36,7 +39,7 @@ export const indentGetAllReducer = (state = { indents:[], indentDate:[] }, actio
     case INDENT_GETALL_RESET:
       return { loading: false, indents: [] }
     case INDENT_GET_BY_DATE_SUCCESS:
-        return { loading: false, indentDate: action.payload }
+      return { loading: false, indentDate: action.payload }
     case INDENT_GETALL_FAIL:
       return { loading: false, error: action.payload }
     default:
@@ -57,14 +60,17 @@ export const indentGetByDateReducer = (state = { indents: [] }, action) => {
   }
 }
 
-export const indentGetByIdReducer = (state = { indents: [] }, action) => {
+export const indentGetByIdReducer = (
+  state = { loading: true, indent: {} },
+  action
+) => {
   switch (action.type) {
     case INDENT_GET_BY_ID_REQUEST:
       return { loading: true }
     case INDENT_GET_BY_ID_SUCCESS:
-      return { loading: false, indents: action.payload }
+      return { ...state, loading: false, indent: action.payload }
     case INDENT_GET_BY_ID_FAIL:
-      return { loading: false, error: action.payload }
+      return { ...state, loading: false, error: action.payload }
     default:
       return state
   }

@@ -41,3 +41,19 @@
   box-shadow: 1px 3px #aaaaaa;
   transform: translateY(3px);
 }
+
+.link-btn {
+  padding: 0.3rem 1rem;
+  background: #aaaaaa;
+  text-decoration: none;
+  color:black;
+  border-radius: 0.5rem;
+  transition: all ease 1s;
+}
+
+.link-btn:hover, .link-btn:active {
+  background: #2e2e2e;
+  color:#fff;
+}
+
+
