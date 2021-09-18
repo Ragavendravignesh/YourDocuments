@@ -43,6 +43,16 @@ const Header = () => {
                   </LinkContainer>
                 </NavDropdown>
               )}
+              {userInfo && !userInfo.isAdmin && (
+                <NavDropdown title='Pre Order' id='username'>
+                <LinkContainer to='/order'>
+                  <NavDropdown.Item>Pre Order</NavDropdown.Item>
+                </LinkContainer>
+                <LinkContainer to='/my/order'>
+                  <NavDropdown.Item>My Orders</NavDropdown.Item>
+                </LinkContainer>
+              </NavDropdown>
+              )}
               {userInfo ? (
                 <NavDropdown
                   title={capitiliseFirstLetter(userInfo.name)}

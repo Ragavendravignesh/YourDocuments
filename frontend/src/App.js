@@ -11,6 +11,7 @@ import ProfileScreen from './screens/ProfileScreen/ProfileScreen'
 import IndentScreen from './screens/IndentScreen/IndentScreen';
 import ShowIndentScreen from './screens/ShowIndentScreen/ShowIndentScreen';
 import ShowSingleIndentScreen from './screens/ShowSingleIndent/ShowSingleIndentScreen';
+import PreOrderScreeen from './screens/PreOrderScreen/PreOrderScreen';
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
           <Route path='/indent' component={IndentScreen} />
           <Route path='/show/indent' component={ShowIndentScreen} exact/>
           <Route path='/show/indent/:id' component={ShowSingleIndentScreen}/>
+          <Route path='/order' component={PreOrderScreeen} />
         </Container>
       </main>
       <Footer />

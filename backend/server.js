@@ -6,6 +6,7 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import userRoutes from './routes/userRoutes.js';
 import indentRoutes from './routes/indentRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
+import cors from 'cors';
 
 dotenv.config();
 connectDB();
@@ -13,7 +14,7 @@ connectDB();
 const app = express();
 
 app.use(express.json());
-
+app.use(cors());
 app.use('/api/users', userRoutes);
 app.use('/api/indents', indentRoutes);
 app.use('/api/orders', orderRoutes);

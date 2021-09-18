@@ -2,7 +2,7 @@ import Order from '../models/orderSchema.js';
 import asyncHandler from 'express-async-handler';
 
 const addOrder = asyncHandler(async (req, res) => {
-    const { amount, date, message } = req.body;
+    const { amount, mobileno, date, message } = req.body;
     const newData = new Order({
         user: req.user._id,
         mobileno,
