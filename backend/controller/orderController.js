@@ -5,6 +5,7 @@ const addOrder = asyncHandler(async (req, res) => {
     const { amount, date, message } = req.body;
     const newData = new Order({
         user: req.user._id,
+        mobileno,
         amount,
         date,
         message
@@ -23,10 +24,11 @@ const addOrder = asyncHandler(async (req, res) => {
 
 const updateOrder = asyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id);
-    const { amount, date, message, user } = req.body;
+    const { amount, date, message, user, mobileno } = req.body;
 
     if(order) {
         order.user = user || req.user._id;
+        order.mobileno = mobileno || order.mobileno
         order.amount = amount || order.amount;
         order.date = date || order.date;
         order.message = message || order.message;

@@ -6,6 +6,10 @@ const orderSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
     },
+    mobileno: {
+      type: Number,
+      required: true
+    },
     amount: {
       type: Number,
       required: true,
