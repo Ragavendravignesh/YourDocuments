@@ -13,11 +13,13 @@ import {
   indentGetAllReducer,
   indentGetByDateReducer,
   indentGetByIdReducer,
-  indentUpdateReducer
+  indentUpdateReducer,
 } from './reducers/indentReducer'
 
 import {
-  orderAddReducer
+  orderAddReducer,
+  orderGetAllReducer,
+  orderGetMineReducer,
 } from './reducers/orderReducer'
 
 const reducers = combineReducers({
@@ -30,8 +32,10 @@ const reducers = combineReducers({
   indentGetByDate: indentGetByDateReducer,
   indentGetById: indentGetByIdReducer,
   indentUpdate: indentUpdateReducer,
-  orderAdd: orderAddReducer
-});
+  orderAdd: orderAddReducer,
+  orderGetAll: orderGetAllReducer,
+  orderGetMine: orderGetMineReducer,
+})
 
 const userInfoFromStorage = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo'))
