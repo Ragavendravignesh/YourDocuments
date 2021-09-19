@@ -1,0 +1,15 @@
+.round {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 5rem;
+    width: 5rem;
+    background:#800080;
+    border-radius: 50%;
+    margin: 0.5rem;
+}
+
+.content {
+    color: #fff;
+    font-size: 2rem;
+}
