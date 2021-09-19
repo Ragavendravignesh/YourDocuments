@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import FormContainer from '../../components/FormContainer'
 import { addOrder } from '../../actions/orderActions'
 import Message from '../../components/Message'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 import './preOrderScreen.css'
 
 const PreOrderScreen = () => {
@@ -15,20 +15,23 @@ const PreOrderScreen = () => {
   const orderAdd = useSelector((state) => state.orderAdd)
   const { loading, success, error } = orderAdd
 
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+
   const dispatch = useDispatch()
 
   const resetForm = () => {
-      setAmount('')
-      setMobileno('')
-      setMessage('')
+    setAmount('')
+    setMobileno('')
+    setMessage('')
   }
 
   const submitHandler = (e) => {
     e.preventDefault()
 
-    const order = { amount, mobileno, message }
+    const order = { amount, mobileno, message, name: userInfo.name }
 
-    console.log('order: ', order);
+    resetForm()
     dispatch(addOrder(order))
   }
 
@@ -66,7 +69,12 @@ const PreOrderScreen = () => {
         </Form.Group>
         <Form.Group controlId='message'>
           <Form.Label>Message</Form.Label>
-          <Form.Control as='textarea' rows={3} onChange={e => setMessage(e.target.value)} value={message}/>
+          <Form.Control
+            as='textarea'
+            rows={3}
+            onChange={(e) => setMessage(e.target.value)}
+            value={message}
+          />
         </Form.Group>
         {!success && (
           <Button
@@ -78,9 +86,11 @@ const PreOrderScreen = () => {
           </Button>
         )}
         {success && (
-          <Link to='/' className='link-btn' style={{ marginTop: '1rem' }}>
-            Click here to go back
-          </Link>
+          <div className='space'>
+            <Link to='/' className='link-btn'>
+              Click here to go back
+            </Link>
+          </div>
         )}
       </Form>
     </FormContainer>

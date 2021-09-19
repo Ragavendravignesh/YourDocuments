@@ -2,9 +2,10 @@ import Order from '../models/orderSchema.js';
 import asyncHandler from 'express-async-handler';
 
 const addOrder = asyncHandler(async (req, res) => {
-    const { amount, mobileno, date, message } = req.body;
+    const { amount, mobileno, date, message, name } = req.body;
     const newData = new Order({
         user: req.user._id,
+        name,
         mobileno,
         amount,
         date,
@@ -24,10 +25,11 @@ const addOrder = asyncHandler(async (req, res) => {
 
 const updateOrder = asyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id);
-    const { amount, date, message, user, mobileno } = req.body;
+    const { amount, date, message, user, mobileno, name } = req.body;
 
     if(order) {
         order.user = user || req.user._id;
+        order.name = name || order.name
         order.mobileno = mobileno || order.mobileno
         order.amount = amount || order.amount;
         order.date = date || order.date;

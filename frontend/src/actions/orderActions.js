@@ -3,7 +3,7 @@ import {
   ORDER_ADD_REQUEST,
   ORDER_ADD_SUCCESS,
   ORDER_GET_MINE_REQUEST,
-  ORDER_GET_MINE_SUCCESSS,
+  ORDER_GET_MINE_SUCCESS,
   ORDER_GET_MINE_FAIL,
   ORDER_GET_ALL_REQUEST,
   ORDER_GET_ALL_SUCCESS,
@@ -85,7 +85,7 @@ export const getMyOrder = () => async (dispatch, getState) => {
     }
     const { data } = await axios.get('/api/orders/myorder', config);
 
-    dispatch({ type: ORDER_GET_ALL_SUCCESS, payload: data });
+    dispatch({ type: ORDER_GET_MINE_SUCCESS, payload: data });
     
   } catch (error) {
     dispatch({

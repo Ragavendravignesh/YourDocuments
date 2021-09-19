@@ -148,7 +148,7 @@ export const updateIndent = (id, value) => async (dispatch, getState) => {
       }
     }
 
-    const {data} = await axios.put(`/api/indents/${id}`, value ,config);
+    const { data } = await axios.put(`/api/indents/${id}`, value ,config);
 
     dispatch({ type: INDENT_UPDATE_SUCCESS })
   } catch (error) {
