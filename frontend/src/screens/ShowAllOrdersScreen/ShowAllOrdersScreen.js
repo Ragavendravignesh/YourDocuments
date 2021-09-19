@@ -23,8 +23,8 @@ const ShowAllOrdersScreen = () => {
   return <Container style={{marginTop:'4rem'}}>
       { loading && <Loader/> }
       { error && <Message variant='danger'>{error}</Message> }
-      { orders && orders.map(order => (
-        <Card className='mt-2'>
+      { orders && orders.map((order, idx)=> (
+        <Card className='mt-2' key={idx}>
           <Card.Title>{order.name}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">{order.mobileno}</Card.Subtitle>
           <Row>
