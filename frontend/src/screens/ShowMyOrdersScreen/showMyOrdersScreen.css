@@ -1,0 +1,14 @@
+.order-card {
+    background: #800080;
+    color: #fff;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+}
+
+.order-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
