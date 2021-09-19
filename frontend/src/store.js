@@ -3,7 +3,9 @@ import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 import {
+  userDeleteReducer,
   userDetailsReducer,
+  userGetAllReducer,
   userLoginReducer,
   userRegisterReducer,
   userUpdateReducer,
@@ -27,6 +29,8 @@ const reducers = combineReducers({
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
   userUpdate: userUpdateReducer,
+  userGetAll: userGetAllReducer,
+  userDelete: userDeleteReducer,
   indentAdd: indentAddReducer,
   indentGet: indentGetAllReducer,
   indentGetByDate: indentGetByDateReducer,

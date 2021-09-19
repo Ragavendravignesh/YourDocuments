@@ -14,7 +14,7 @@ const ShowMyOrdersScreen = () => {
 
   useEffect(() => {
     dispatch(getMyOrder())
-  }, [])
+  }, [dispatch])
 
   return (
     <Container style={{ marginTop: '4rem' }}>

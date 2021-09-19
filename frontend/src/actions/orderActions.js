@@ -28,7 +28,7 @@ export const addOrder = (order) => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.post('/api/orders', order, config)
+    await axios.post('/api/orders', order, config)
 
     dispatch({ type: ORDER_ADD_SUCCESS })
   } catch (error) {

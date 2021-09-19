@@ -11,7 +11,7 @@ import {
 } from '../constants/orderConstants'
 
 export const orderAddReducer = (
-  state = { loading: true, success: false },
+  state = { loading: false, success: false },
   action
 ) => {
   switch (action.type) {
@@ -26,7 +26,7 @@ export const orderAddReducer = (
   }
 }
 
-export const orderGetAllReducer = ( state = { orders: [], loading: true }, action ) => {
+export const orderGetAllReducer = ( state = { orders: [], loading: false }, action ) => {
   switch(action.type) {
     case ORDER_GET_ALL_REQUEST:
       return { loading: true }

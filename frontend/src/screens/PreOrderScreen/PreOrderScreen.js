@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import FormContainer from '../../components/FormContainer'
 import { addOrder } from '../../actions/orderActions'
+import Loader from '../../components/Loader';
 import Message from '../../components/Message'
 import { Link } from 'react-router-dom'
 import './preOrderScreen.css'
@@ -42,6 +43,7 @@ const PreOrderScreen = () => {
         Suppose if you want to buy stamp papers, have doubts or clarifications.
         Place a pre-order here, we'll help you with your queries.
       </p>
+      {loading && <Loader/> }
       {error && <Message variant='danger'>{error}</Message>}
       {success && (
         <Message variant='success'>

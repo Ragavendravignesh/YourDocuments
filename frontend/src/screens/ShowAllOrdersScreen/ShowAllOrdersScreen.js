@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getOrders, getMyOrder } from '../../actions/orderActions'
+import { getOrders } from '../../actions/orderActions'
 import { Card, Container, Row, Col } from 'react-bootstrap'
 import Loader from '../../components/Loader'
 import Message from '../../components/Message'
@@ -18,7 +18,7 @@ const ShowAllOrdersScreen = () => {
     if (userInfo && userInfo.isAdmin) {
       dispatch(getOrders())
     }
-  }, [])
+  }, [dispatch, userInfo])
 
   return (
     <Container style={{ marginTop: '4rem' }}>
