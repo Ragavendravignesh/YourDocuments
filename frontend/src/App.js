@@ -12,6 +12,7 @@ import IndentScreen from './screens/IndentScreen/IndentScreen';
 import ShowIndentScreen from './screens/ShowIndentScreen/ShowIndentScreen';
 import ShowSingleIndentScreen from './screens/ShowSingleIndent/ShowSingleIndentScreen';
 import PreOrderScreeen from './screens/PreOrderScreen/PreOrderScreen';
+import ShowOrdersScreen from './screens/ShowOrdersScreen/ShowOrdersScreen';
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
           <Route path='/show/indent' component={ShowIndentScreen} exact/>
           <Route path='/show/indent/:id' component={ShowSingleIndentScreen}/>
           <Route path='/order' component={PreOrderScreeen} />
+          <Route path='/show/orders' component={ShowOrdersScreen} />
         </Container>
       </main>
       <Footer />
