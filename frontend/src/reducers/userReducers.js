@@ -14,6 +14,9 @@ import {
   USER_UPDATE_SUCCESS,
   USER_UPDATE_FAIL,
   USER_UPDATE_RESET,
+  USER_GET_ALL_REQUEST,
+  USER_GET_ALL_SUCCESS,
+  USER_GET_ALL_FAIL
 } from '../constants/userConstants'
 
 export const userLoginReducer = (state = {}, action) => {
@@ -69,6 +72,19 @@ export const userUpdateReducer = (state = {}, action) => {
       return { laoding: false, error: action.payload }
     case USER_UPDATE_RESET:
       return {}
+    default:
+      return state
+  }
+}
+
+export const userGetAllReducer = (state = { users: [] }, action) => {
+  switch(action.type) {
+    case USER_GET_ALL_REQUEST:
+      return { loading: true }
+    case USER_GET_ALL_SUCCESS:
+      return { loading: false, users: action.payload }
+    case USER_GET_ALL_FAIL:
+      return { loading: false, error: action.payload }
     default:
       return state
   }

@@ -11,7 +11,10 @@ import {
   USER_DETAILS_FAIL,
   USER_UPDATE_REQUEST,
   USER_UPDATE_SUCCESS,
-  USER_UPDATE_FAIL
+  USER_UPDATE_FAIL,
+  USER_GET_ALL_REQUEST,
+  USER_GET_ALL_SUCCESS,
+  USER_GET_ALL_FAIL,
 } from '../constants/userConstants'
 
 import axios from 'axios'
@@ -75,12 +78,12 @@ export const register = (name, email, password) => async (dispatch) => {
   }
 }
 
-export const getUserDetails = (id) => async  (dispatch, getState) => {
+export const getUserDetails = (id) => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_DETAILS_REQUEST })
 
     const {
-      userLogin: { userInfo }
+      userLogin: { userInfo },
     } = getState()
 
     const config = {
@@ -132,6 +135,35 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
         error.response && error.response.data.message
           ? error.response.data.message
           : error.response,
+    })
+  }
+}
+
+export const getAllUsers = () => async (dispatch, getState) => {
+  try {
+    dispatch({ type: USER_GET_ALL_REQUEST })
+
+    const {
+      userLogin: { userInfo },
+    } = getState
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    }
+
+    const { data } = await axios.get('/api/users/', config)
+
+    dispatch({ type: USER_GET_ALL_SUCCESS, payload: data })
+  } catch (error) {
+    dispatch({
+      type: USER_GET_ALL_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     })
   }
 }
