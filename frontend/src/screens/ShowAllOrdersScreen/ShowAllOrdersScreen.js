@@ -4,21 +4,23 @@ import { getOrders } from '../../actions/orderActions'
 import { Card, Container, Row, Col } from 'react-bootstrap'
 import Loader from '../../components/Loader'
 import Message from '../../components/Message'
+import Paginate from '../../components/Paginate/Paginate';
 import './showAllOrdersScreen.css'
 
-const ShowAllOrdersScreen = () => {
+const ShowAllOrdersScreen = ({ match }) => {
+  const pageNumber = match.params.pageNumber;
   const dispatch = useDispatch()
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
   const orderGetAll = useSelector((state) => state.orderGetAll)
-  const { loading, error, orders } = orderGetAll
+  const { loading, error, orders, page, pages } = orderGetAll
 
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
-      dispatch(getOrders())
+      dispatch(getOrders(pageNumber))
     }
-  }, [dispatch, userInfo])
+  }, [dispatch, userInfo, pageNumber])
 
   return (
     <Container style={{ marginTop: '4rem' }}>
@@ -50,6 +52,7 @@ const ShowAllOrdersScreen = () => {
             ))}
         </Col>
       </Row>
+      <Paginate page={page} pages={pages} pageName='/show/orders' />
     </Container>
   )
 }

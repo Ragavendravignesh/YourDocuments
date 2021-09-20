@@ -31,7 +31,8 @@ const App = () => {
           <Route path='/show/indent/page/:pageNumber' component={ShowIndentScreen} exact />
           <Route path='/show/indent/:id' component={ShowSingleIndentScreen} exact/>
           <Route path='/order' component={PreOrderScreeen} />
-          <Route path='/show/orders' component={ShowAllOrdersScreen} />
+          <Route path='/show/orders' component={ShowAllOrdersScreen} exact/>
+          <Route path='/show/orders/:pageNumber' component={ShowAllOrdersScreen} exact/>
           <Route path='/show/myorders' component={ShowMyOrdersScreen} />
           <Route path='/show/users' component={ShowUsersScreen} />
         </Container>

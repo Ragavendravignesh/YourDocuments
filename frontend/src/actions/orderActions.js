@@ -41,7 +41,7 @@ export const addOrder = (order) => async (dispatch, getState) => {
   }
 }
 
-export const getOrders = () => async (dispatch, getState) => {
+export const getOrders = (page) => async (dispatch, getState) => {
   try {
     dispatch({ type: ORDER_GET_ALL_REQUEST })
 
@@ -56,7 +56,7 @@ export const getOrders = () => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.get('/api/orders', config)
+    const { data } = await axios.get(`/api/orders?page=${page}`, config)
 
     dispatch({ type: ORDER_GET_ALL_SUCCESS, payload: data })
   } catch (error) {
