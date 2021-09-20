@@ -1,9 +1,11 @@
 import React from 'react'
+import Meta from '../../components/Meta';
 import './homescreen.css'
 
 const HomeScreen = () => {
   return (
     <div>
+      <Meta/>
       <div className='top-banner'>
         <div className='content'>
           <h1>P Swaminathan</h1>
