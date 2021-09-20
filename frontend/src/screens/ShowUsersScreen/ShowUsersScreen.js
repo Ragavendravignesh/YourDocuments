@@ -4,13 +4,16 @@ import { getAllUsers, deleteUser } from '../../actions/userActions'
 import Loader from '../../components/Loader'
 import Message from '../../components/Message'
 import { Table, Button, Container } from 'react-bootstrap'
+import Paginate from '../../components/Paginate/Paginate';
 import './showUsersScreen.css'
 
-const ShowUsersScreen = () => {
+const ShowUsersScreen = ({match}) => {
+  const pageNumber = match.params.pageNumber;
+
   const dispatch = useDispatch()
 
   const userGetAll = useSelector((state) => state.userGetAll)
-  const { loading, error, users } = userGetAll
+  const { loading, error, users, page, pages } = userGetAll
 
   const userDelete = useSelector((state) => state.userDelete)
   const {
@@ -19,8 +22,8 @@ const ShowUsersScreen = () => {
   } = userDelete
 
   useEffect(() => {
-    dispatch(getAllUsers())
-  }, [dispatch, successDelete])
+    dispatch(getAllUsers(pageNumber))
+  }, [dispatch, successDelete, pageNumber])
 
   const deleteHandler = (id) => {
     dispatch(deleteUser(id))
@@ -63,6 +66,7 @@ const ShowUsersScreen = () => {
           </tbody>
         </Table>
       )}
+      <Paginate page={page} pages={pages} pageName='/show/users'/>
     </Container>
   )
 }

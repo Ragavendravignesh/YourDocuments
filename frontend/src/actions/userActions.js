@@ -142,7 +142,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
   }
 }
 
-export const getAllUsers = () => async (dispatch, getState) => {
+export const getAllUsers = (page) => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_GET_ALL_REQUEST })
 
@@ -157,7 +157,7 @@ export const getAllUsers = () => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.get('/api/users/', config)
+    const { data } = await axios.get(`/api/users?page=${page}`, config)
 
     dispatch({ type: USER_GET_ALL_SUCCESS, payload: data })
   } catch (error) {
@@ -175,17 +175,19 @@ export const deleteUser = (id) => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_DELETE_REQUEST })
 
-    const {userLogin: {userInfo } } = getState();
+    const {
+      userLogin: { userInfo },
+    } = getState()
 
     const config = {
       headers: {
         'Content-Type': 'appplication/json',
-        Authorization : `Bearer ${userInfo.token}`
-      }
+        Authorization: `Bearer ${userInfo.token}`,
+      },
     }
-    await axios.delete(`/api/users/${id}`, config);
-    
-    dispatch({ type: USER_DELETE_SUCCESS });
+    await axios.delete(`/api/users/${id}`, config)
+
+    dispatch({ type: USER_DELETE_SUCCESS })
   } catch (error) {
     dispatch({
       type: USER_DELETE_FAIL,

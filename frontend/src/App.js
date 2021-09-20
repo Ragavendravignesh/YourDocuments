@@ -34,7 +34,8 @@ const App = () => {
           <Route path='/show/orders' component={ShowAllOrdersScreen} exact/>
           <Route path='/show/orders/:pageNumber' component={ShowAllOrdersScreen} exact/>
           <Route path='/show/myorders' component={ShowMyOrdersScreen} />
-          <Route path='/show/users' component={ShowUsersScreen} />
+          <Route path='/show/users' component={ShowUsersScreen} exact/>
+          <Route path='/show/users/:pageNumber' component={ShowUsersScreen} exact/>
         </Container>
       </main>
       <Footer />
