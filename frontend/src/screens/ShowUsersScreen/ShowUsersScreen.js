@@ -44,7 +44,6 @@ const ShowUsersScreen = () => {
             </tr>
           </thead>
           <tbody>
-              {console.log(users)}
             {users && users.map((user, idx) => (
               <tr key={idx}>
                 <td>{idx + 1}</td>

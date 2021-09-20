@@ -28,7 +28,8 @@ const App = () => {
           <Route path='/profile' component={ProfileScreen} />
           <Route path='/indent' component={IndentScreen} />
           <Route path='/show/indent' component={ShowIndentScreen} exact />
-          <Route path='/show/indent/:id' component={ShowSingleIndentScreen} />
+          <Route path='/show/indent/page/:pageNumber' component={ShowIndentScreen} exact />
+          <Route path='/show/indent/:id' component={ShowSingleIndentScreen} exact/>
           <Route path='/order' component={PreOrderScreeen} />
           <Route path='/show/orders' component={ShowAllOrdersScreen} />
           <Route path='/show/myorders' component={ShowMyOrdersScreen} />

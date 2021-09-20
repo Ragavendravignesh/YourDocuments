@@ -14,7 +14,7 @@ import {
   INDENT_GET_BY_DATE_FAIL,
   INDENT_UPDATE_REQUEST,
   INDENT_UPDATE_SUCCESS,
-  INDENT_UPDATE_FAIL
+  INDENT_UPDATE_FAIL,
 } from '../constants/indentConstants'
 
 export const indentAddReducer = (state = {}, action) => {
@@ -38,11 +38,14 @@ export const indentGetAllReducer = (
     case INDENT_GETALL_REQUEST:
       return { loading: true }
     case INDENT_GETALL_SUCCESS:
-      return { loading: false, indents: action.payload }
+      return {
+        loading: false,
+        indents: action.payload.indents,
+        page: action.payload.page,
+        pages: action.payload.pages,
+      }
     case INDENT_GETALL_RESET:
       return { loading: false, indents: [] }
-    case INDENT_GET_BY_DATE_SUCCESS:
-      return { loading: false, indentDate: action.payload }
     case INDENT_GETALL_FAIL:
       return { loading: false, error: action.payload }
     default:
@@ -79,15 +82,18 @@ export const indentGetByIdReducer = (
   }
 }
 
-export const indentUpdateReducer = (state = { success:false, loading: true }, action) => {
-  switch(action.type) {
+export const indentUpdateReducer = (
+  state = { success: false, loading: true },
+  action
+) => {
+  switch (action.type) {
     case INDENT_UPDATE_REQUEST:
       return { loading: true }
     case INDENT_UPDATE_SUCCESS:
       return { loading: false, success: true }
     case INDENT_UPDATE_FAIL:
       return { loading: false, error: action.payload }
-    default: 
+    default:
       return state
   }
 }

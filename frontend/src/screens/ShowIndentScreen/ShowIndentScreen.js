@@ -5,14 +5,18 @@ import { getAllIndents } from '../../actions/indentActions'
 import Loader from '../../components/Loader'
 import Message from '../../components/Message'
 import IndentCard from '../../components/IndentCard/IndentCard'
+import Paginate from '../../components/Paginate/Paginate'
 import './showIndentScreen.css'
 
-const ShowIndentScreen = () => {
+const ShowIndentScreen = ({ match }) => {
+  const pageNumber = match.params.pageNumber
+
   const [date, setDate] = useState()
   const dispatch = useDispatch()
 
   const indentGet = useSelector((state) => state.indentGet)
-  let { loading, error, indents } = indentGet
+  let { loading, indents, page, pages } = indentGet
+
   const [indentArray, setIndentArray] = useState([])
   const [NotFoundMessage, setNotFoundMessage] = useState()
 
@@ -21,19 +25,24 @@ const ShowIndentScreen = () => {
   }
 
   useEffect(() => {
-    dispatch(getAllIndents())
-  }, [dispatch])
+    dispatch(getAllIndents(pageNumber))
+  }, [dispatch, pageNumber])
 
   const submitHandler = (e) => {
     e.preventDefault()
-    setNotFoundMessage('');
+    setNotFoundMessage('')
 
     const searchedValues = indents.filter((indent) => {
       if (formatDate(indent.indentDate) === date) {
         return indent
       }
     })
-    {!searchedValues.length && setNotFoundMessage('Sorry we couldn\'t find the indents on the speciifed date, Instead here we display all the indents.')}
+    {
+      !searchedValues.length &&
+        setNotFoundMessage(
+          "Sorry we couldn't find the indents on the speciifed date, Instead here we display all the indents."
+        )
+    }
     setIndentArray(searchedValues)
   }
 
@@ -59,8 +68,9 @@ const ShowIndentScreen = () => {
       </Form>
       <div style={{ marginTop: '1rem' }}>
         {loading && <Loader />}
-        {error && <Message variant='danger'>{error}</Message>}
-        {NotFoundMessage && <Message variant='danger'>{NotFoundMessage}</Message>}
+        {NotFoundMessage && (
+          <Message variant='danger'>{NotFoundMessage}</Message>
+        )}
         <div className='display-grid'>
           {!indentArray.length &&
             indents &&
@@ -73,18 +83,20 @@ const ShowIndentScreen = () => {
                 balance={indent.totalBalance}
               />
             ))}
-          {indentArray &&
-            indentArray.length ?
-            indentArray.map((indent, idx) => (
-              <IndentCard
-                key={idx}
-                id={indent._id}
-                date={formatDate(indent.indentDate)}
-                balance={indent.totalBalance}
-              />
-            )):undefined}
+          {indentArray && indentArray.length
+            ? indentArray.map((indent, idx) => (
+                <IndentCard
+                  key={idx}
+                  id={indent._id}
+                  date={formatDate(indent.indentDate)}
+                  balance={indent.totalBalance}
+                />
+              ))
+            : undefined}
         </div>
       </div>
+
+      <Paginate page={page} pages={pages} pageName='/show/indent/page' />
     </Container>
   )
 }

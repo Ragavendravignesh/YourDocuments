@@ -46,7 +46,7 @@ export const addIndent = (indent) => async (dispatch, getState) => {
   }
 }
 
-export const getAllIndents = () => async (dispatch, getState) => {
+export const getAllIndents = (page) => async (dispatch, getState) => {
   try {
     dispatch({ type: INDENT_GETALL_REQUEST })
 
@@ -61,7 +61,7 @@ export const getAllIndents = () => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.get('/api/indents/', config)
+    const { data } = await axios.get(`/api/indents?page=${page}`, config)
 
     dispatch({ type: INDENT_GETALL_SUCCESS, payload: data })
   } catch (error) {

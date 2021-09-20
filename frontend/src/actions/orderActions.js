@@ -14,7 +14,6 @@ import axios from 'axios'
 
 export const addOrder = (order) => async (dispatch, getState) => {
   try {
-    console.log('action', order)
     dispatch({ type: ORDER_ADD_REQUEST })
 
     const {
