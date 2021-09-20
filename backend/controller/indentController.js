@@ -2,9 +2,15 @@ import asyncHandler from 'express-async-handler'
 import Indent from '../models/indentSchema.js'
 
 const getIndents = asyncHandler(async (req, res) => {
-  const indents = await Indent.find({})
+  const page = Number(req.query.page) || 1;
+  const pageSize = 1;
+  const skip = ((page - 1) * pageSize);
 
-  res.send(indents)
+  const count = await Indent.countDocuments();
+
+  const indents = await Indent.find({}).skip(skip).limit(pageSize);
+
+  res.send({ indents, page, pages: Math.ceil(count / pageSize )})
 })
 
 const getIndentByDate = asyncHandler(async (req, res) => {

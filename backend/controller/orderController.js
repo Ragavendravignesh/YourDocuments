@@ -59,9 +59,15 @@ const deleteOrder = asyncHandler(async (req, res) => {
 });
 
 const getOrders = asyncHandler(async (req, res) => {
-    const orders = await Order.find({});
 
-    res.json(orders);
+    const page = Number(req.query.page) || 1;
+    const pageSize = 5;
+    const skip = ((page - 1) * pageSize );
+
+    const count = await Order.countDocuments();
+    const orders = await Order.find({}).limit(pageSize).skip(skip);
+
+    res.json({orders, page, pages: Math.ceil(count / pageSize)});
 });
 
 const getMyOrder = asyncHandler(async (req, res) => {
